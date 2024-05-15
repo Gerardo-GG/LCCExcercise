@@ -11,7 +11,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,7 +32,6 @@ import com.ibm.lcc_template.presentation.viewmodel.TodosViewmodel
 fun BodyView(viewmodel: TodosViewmodel) {
 
     val data by viewmodel.uiState.collectAsState()
-    val context = LocalContext.current as Activity
 
     when (val state = data) {
         is UIState.Error -> {
@@ -42,6 +43,9 @@ fun BodyView(viewmodel: TodosViewmodel) {
         }
 
         is UIState.Success -> {
+
+
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -53,7 +57,7 @@ fun BodyView(viewmodel: TodosViewmodel) {
                     TodoViewItem(todoItem, stateCompleted) {
                         stateCompleted = it
                         todoItem.completed = stateCompleted
-                        viewmodel.updateItem(context, todoItem)
+                        viewmodel.updateItem(todoItem)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))

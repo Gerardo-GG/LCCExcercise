@@ -3,6 +3,7 @@ package com.ibm.lcc_template.presentation.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,6 +18,7 @@ import com.ibm.lcc_template.domain.UpdateTodoUseCase
 import com.ibm.lcc_template.presentation.view.components.BodyView
 import com.ibm.lcc_template.presentation.viewmodel.TodosViewmodel
 import com.ibm.lcc_template.ui.theme.LCC_templateTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Api To-DO
@@ -29,19 +31,13 @@ import com.ibm.lcc_template.ui.theme.LCC_templateTheme
  * 4.    Mantener estado de finalizadon de las tareas
  */
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private lateinit var appContext: LCCApplication
-    private lateinit var viewModel: TodosViewmodel
+    private val viewModel: TodosViewmodel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        appContext = applicationContext as LCCApplication
-        viewModel = TodosViewmodel(
-            GetTodosUseCase(appContext.room),
-            UpdateTodoUseCase(appContext.room)
-        )
 
         viewModel.getAllTodos()
 

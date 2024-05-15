@@ -4,12 +4,11 @@ import android.content.Context
 import com.ibm.lcc_template.data.TodosRepository
 import com.ibm.lcc_template.data.database.TodoDatabase
 import com.ibm.lcc_template.data.model.TodoItem
+import javax.inject.Inject
 
-class GetTodosUseCase(
-    private var room: TodoDatabase
+class GetTodosUseCase @Inject constructor(
+    private val repository: TodosRepository
 ) {
-
-    private val repository = TodosRepository(room)
 
     suspend operator fun invoke(): Array<TodoItem> = repository.getAllTodos()
 

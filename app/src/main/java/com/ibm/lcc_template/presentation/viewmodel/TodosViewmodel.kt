@@ -1,16 +1,21 @@
 package com.ibm.lcc_template.presentation.viewmodel
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ibm.lcc_template.data.model.TodoItem
 import com.ibm.lcc_template.domain.GetTodosUseCase
 import com.ibm.lcc_template.domain.UpdateTodoUseCase
 import com.ibm.lcc_template.presentation.UIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TodosViewmodel(
+@HiltViewModel
+class TodosViewmodel @Inject constructor(
     private val getTodosUseCase: GetTodosUseCase,
     private val updateUseCase: UpdateTodoUseCase
 ): ViewModel() {
@@ -32,9 +37,9 @@ class TodosViewmodel(
         }
     }
 
-    fun updateItem(context: Context, item: TodoItem){
+    fun updateItem(item: TodoItem){
         viewModelScope.launch {
-            updateUseCase(context, item)
+            updateUseCase(item)
         }
     }
 
