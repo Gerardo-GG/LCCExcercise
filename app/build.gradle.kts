@@ -4,6 +4,8 @@ plugins {
 
     alias(libs.plugins.kotlinKapt)
     alias(libs.plugins.kotlinKsp)
+
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -78,6 +80,10 @@ dependencies {
 
     // To use Kotlin Symbol Processing (KSP)
     kapt(libs.androidx.room.compiler)
+
+    // Dagger
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
 
     androidTestImplementation(libs.androidx.junit)

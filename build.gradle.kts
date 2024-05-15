@@ -5,4 +5,7 @@ plugins {
 
     alias(libs.plugins.kotlinKapt) apply false
     alias(libs.plugins.kotlinKsp) apply false
+
+    // Dagger
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
