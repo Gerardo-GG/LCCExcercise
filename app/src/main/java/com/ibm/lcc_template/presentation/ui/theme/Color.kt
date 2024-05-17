@@ -1,4 +1,4 @@
-package com.ibm.lcc_template.ui.theme
+package com.ibm.lcc_template.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
